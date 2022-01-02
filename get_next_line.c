@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 13:58:43 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/01 15:00:53 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/02 14:00:47 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,12 @@ char	*ft_save(char *save)
 	}
 	str = ft_strnew(ft_strlen(save) - i);
 	if (!str)
-	{
 		return (0);
-		free(save);
-	}
 	i++;
 	while (save[i])
 		str[k++] = save[i++];
 	str[k] = '\0';
-	ft_strdel(&save);
+	free(save);
 	return (str);
 }
 
@@ -51,7 +48,6 @@ char	*ft_new_line(char *save)
 	i = 0;
 	if (!save[i])
 	{
-		free(save);
 		return (NULL);
 	}
 	while (save[i] && save[i] != '\n')
@@ -69,16 +65,16 @@ char	*ft_new_line(char *save)
 	return (str);
 }
 
-char	*ft_loopsave(int fd, char *save)
+int	get_next_line(int fd, char **line)
 {
-	int		red_bytes;
-	char	*str;
-	char	*buff;
+	static char	*save;
+	char		*buff;
+	int			red_bytes;
 
 	red_bytes = 1;
-	if (fd < 0 || BUFF_SIZE <= 0)
+	if (!line || fd < 0 || BUFF_SIZE <= 0)
 		return (-1);
-	buff = ft_strnew(BUFF_SIZE);
+	buff = malloc(sizeof(*buff) * (BUFF_SIZE +1));
 	if (!buff)
 		return (-1);
 	while (!ft_strchr(save, '\n') && red_bytes != 0)
@@ -90,24 +86,13 @@ char	*ft_loopsave(int fd, char *save)
 			return (-1);
 		}
 		buff[red_bytes] = '\0';
-		str = ft_strjoin(save, buff);
+		save = ft_strjoin(save, buff);
 	}
-	free(buff);
-	return (str);
-}
-
-int	get_next_line(int fd, char **line)
-{
-	static char	*save;
-
-	save = ft_loopsave(fd, &line);
 	*line = ft_new_line(save);
 	save = ft_save(save);
+	ft_strdel(&buff);
 	if (red_bytes == 0)
-	{
-		free(save);
 		return (0);
-	}
 	return (1);
 }
 /*red_bytes = 1;

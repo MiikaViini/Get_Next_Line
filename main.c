@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 15:06:38 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/01 14:52:58 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/01 22:12:51 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	test(int fd)
 		free(line);
 		line = NULL;
 	}
-	free(line);
 	close(fd);
 }
 
