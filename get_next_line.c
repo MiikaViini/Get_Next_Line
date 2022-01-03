@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 13:58:43 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/02 14:00:47 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/03 22:49:28 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,7 @@ char	*ft_new_line(char *save)
 
 	i = 0;
 	if (!save[i])
-	{
 		return (NULL);
-	}
 	while (save[i] && save[i] != '\n')
 		i++;
 	str = ft_strnew(i);
@@ -65,50 +63,46 @@ char	*ft_new_line(char *save)
 	return (str);
 }
 
+char	*return_temp(int fd, char *save)
+{
+	char		*temp;
+	int			red_bytes;
+	char		*buff;
+
+	red_bytes = 1;
+	temp = NULL;
+	buff = ft_strnew(BUFF_SIZE);
+	if (!buff)
+		return (NULL);
+	while (!ft_strchr(save, '\n') && red_bytes != 0)
+	{	
+		red_bytes = read(fd, buff, BUFF_SIZE);
+		if (red_bytes == -1)
+		{
+			free(buff);
+			return (NULL);
+		}
+		buff[red_bytes] = '\0';
+		temp = ft_strjoin(save, buff);
+		free(save);
+		save = temp;
+	}
+	ft_strdel(&buff);
+	return (save);
+}
+
 int	get_next_line(int fd, char **line)
 {
 	static char	*save;
-	char		*buff;
-	int			red_bytes;
 
-	red_bytes = 1;
 	if (!line || fd < 0 || BUFF_SIZE <= 0)
 		return (-1);
-	buff = malloc(sizeof(*buff) * (BUFF_SIZE +1));
-	if (!buff)
+	save = return_temp(fd, save);
+	if (!save)
 		return (-1);
-	while (!ft_strchr(save, '\n') && red_bytes != 0)
-	{	
-		red_bytes = read(fd, buff, BUFF_SIZE);
-		if (red_bytes == -1)
-		{
-			free(buff);
-			return (-1);
-		}
-		buff[red_bytes] = '\0';
-		save = ft_strjoin(save, buff);
-	}
 	*line = ft_new_line(save);
 	save = ft_save(save);
-	ft_strdel(&buff);
-	if (red_bytes == 0)
+	if (save == NULL)
 		return (0);
 	return (1);
 }
-/*red_bytes = 1;
-	if (!line || fd < 0 || BUFF_SIZE <= 0)
-		return (-1);
-	buff = ft_strnew(BUFF_SIZE);
-	if (!buff)
-		return (-1);
-	while (!ft_strchr(save, '\n') && red_bytes != 0)
-	{	
-		red_bytes = read(fd, buff, BUFF_SIZE);
-		if (red_bytes == -1)
-		{
-			free(buff);
-			return (-1);
-		}
-		buff[red_bytes] = '\0';
-		save = ft_strjoin(save, buff);
-	}*/
