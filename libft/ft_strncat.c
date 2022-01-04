@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviinika <mviinika>                        +#+  +:+       +#+        */
+/*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 10:53:25 by mviinika          #+#    #+#             */
-/*   Updated: 2021/12/20 14:01:18 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/04 14:16:50 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "libft.h"
+#include "libft/includes/libft.h"
 
 char	*ft_strncat(char *s1, const char *s2, size_t n)
 {

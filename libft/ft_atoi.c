@@ -6,11 +6,11 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/18 09:00:49 by mviinika          #+#    #+#             */
-/*   Updated: 2021/12/27 10:29:08 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/04 14:16:06 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft/includes/libft.h"
 
 static long	ft_bitsign(long res)
 {

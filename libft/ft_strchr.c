@@ -6,11 +6,11 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 11:18:23 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/03 22:58:50 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/04 14:16:50 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include  "libft.h"
+#include "libft/includes/libft.h"
 
 char	*ft_strchr(const char *s, int c)
 {

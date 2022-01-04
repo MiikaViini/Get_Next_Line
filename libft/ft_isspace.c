@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviinika < mviinika@student.hive.fi>       +#+  +:+       +#+        */
+/*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/15 10:08:10 by mviinika          #+#    #+#             */
-/*   Updated: 2021/12/16 10:19:51 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/04 14:16:06 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft/includes/libft.h"
 
 int	ft_isspace(int c)
 {

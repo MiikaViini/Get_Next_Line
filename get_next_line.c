@@ -6,13 +6,13 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 13:58:43 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/03 22:49:28 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/04 20:33:29 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_save(char *save)
+static char	*ft_save(char *save)
 {
 	int		i;
 	int		k;
@@ -26,7 +26,7 @@ char	*ft_save(char *save)
 		i++;
 	if (!save[i])
 	{
-		free(save);
+		ft_strdel(&save);
 		return (NULL);
 	}
 	str = ft_strnew(ft_strlen(save) - i);
@@ -36,11 +36,11 @@ char	*ft_save(char *save)
 	while (save[i])
 		str[k++] = save[i++];
 	str[k] = '\0';
-	free(save);
+	ft_strdel(&save);
 	return (str);
 }
 
-char	*ft_new_line(char *save)
+static char	*ft_new_line(char *save)
 {
 	size_t	i;
 	char	*str;
@@ -63,7 +63,7 @@ char	*ft_new_line(char *save)
 	return (str);
 }
 
-char	*return_temp(int fd, char *save)
+static char	*ft_return_temp(int fd, char *save)
 {
 	char		*temp;
 	int			red_bytes;
@@ -84,12 +84,33 @@ char	*return_temp(int fd, char *save)
 		}
 		buff[red_bytes] = '\0';
 		temp = ft_strjoin(save, buff);
-		free(save);
+		ft_strdel(&save);
 		save = temp;
 	}
 	ft_strdel(&buff);
 	return (save);
 }
+
+// static int	ft_output(char *save)
+// {
+// 	if (save == NULL)
+// 		return (0);
+// 	return (1);
+// }
+
+// int	get_next_line(int fd, char **line)
+// {
+// 	static char	*save;
+
+// 	if (!line || fd < 0 || BUFF_SIZE <= 0)
+// 		return (-1);
+// 	save = ft_return_temp(fd, save);
+// 	if (!save)
+// 		return (-1);
+// 	*line = ft_new_line(save);
+// 	save = ft_save(save);
+// 	return (ft_output(save));
+// }
 
 int	get_next_line(int fd, char **line)
 {
@@ -97,12 +118,10 @@ int	get_next_line(int fd, char **line)
 
 	if (!line || fd < 0 || BUFF_SIZE <= 0)
 		return (-1);
-	save = return_temp(fd, save);
-	if (!save)
+	save = ft_return_temp(fd, save);
+	if (save == NULL)
 		return (-1);
 	*line = ft_new_line(save);
 	save = ft_save(save);
-	if (save == NULL)
-		return (0);
-	return (1);
+	return (save != NULL || line == NULL);
 }

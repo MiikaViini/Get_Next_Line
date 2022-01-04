@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviinika <mviinika>                        +#+  +:+       +#+        */
+/*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 09:23:53 by mviinika          #+#    #+#             */
-/*   Updated: 2021/12/15 21:48:23 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/04 14:16:06 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft/includes/libft.h"
 
 t_list	*ft_lstnew(void const *content, size_t content_size)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstdelone.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mviinika < mviinika@student.hive.fi>       +#+  +:+       +#+        */
+/*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 09:17:42 by mviinika          #+#    #+#             */
-/*   Updated: 2021/12/10 09:32:10 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/04 14:16:06 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libft/includes/libft.h"
 
 void	ft_lstdelone(t_list **alst, void (*del)(void*, size_t))
 {
