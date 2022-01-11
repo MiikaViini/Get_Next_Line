@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 09:39:49 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/04 14:16:50 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/11 11:53:27 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static size_t	ft_lenint(int n)
 	unsigned char	len;
 
 	len = 1;
-	if (n < 0 )
+	if (n < 0)
 	{
 		if (n == -2147483648)
 			n = n + 1;

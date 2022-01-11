@@ -35,7 +35,7 @@ int	main(void)
 {
 	int	fd;
 
-	fd = open("bible.txt", O_RDONLY);
+	fd = open("text.txt", O_RDONLY);
 	test(fd);
 	return 0;
 }

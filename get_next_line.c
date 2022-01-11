@@ -6,106 +6,97 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 13:58:43 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/05 10:51:59 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/11 14:34:06 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-char	*ft_save(char *save)
+static char	*ft_remain(char *remain)
 {
-	int		i;
-	int		k;
-	char	*str;
+	size_t		index;
+	size_t		str_index;
+	char		*str;
 
-	i = 0;
-	k = 0;
-	if (!save)
+	index = 0;
+	str_index = 0;
+	if (!remain)
 		return (NULL);
-	while (save[i] && save[i] != '\n')
-		i++;
-	if (!save[i])
+	while (remain[index] && remain[index] != '\n')
+		index++;
+	if (!remain[index])
 	{
-		ft_strdel(&save);
+		ft_strdel(&remain);
 		return (NULL);
 	}
-	str = ft_strnew(ft_strlen(save) - i);
+	str = ft_strnew(ft_strlen(remain) - index);
 	if (!str)
 		return (NULL);
-	i++;
-	while (save[i])
-		str[k++] = save[i++];
-	ft_strdel(&save);
+	index++;
+	while (remain[index])
+		str[str_index++] = remain[index++];
+	ft_strdel(&remain);
 	return (str);
 }
 
-char	*ft_new_line(char *save)
+static char	*ft_new_line(char *remain)
 {
-	size_t	i;
+	size_t	index;
 	char	*str;
 
-	i = 0;
-	if (!save)
+	index = 0;
+	if (!remain)
 		return (NULL);
-	while (save[i]&& save[i] != '\n')
-		i++;
-	str = ft_strnew(i);
+	while (remain[index] && remain[index] != '\n')
+		index++;
+	str = ft_strnew(index);
 	if (!str)
 		return (NULL);
-	i = 0;
-	while (save[i] && save[i] != '\n')
+	index = 0;
+	while (remain[index] && remain[index] != '\n')
 	{
-		str[i] = save[i];
-		i++;
+		str[index] = remain[index];
+		index++;
 	}
 	return (str);
 }
 
-char	*ft_return_temp(int fd, char *save)
+static char	*ft_return_temp(int fd, char *remain)
 {
-	char		*temp;
 	int			red_bytes;
-	char		*buff;
+	char		buff[BUFF_SIZE + 1];
+	char		*temp;
 
 	red_bytes = 1;
 	temp = NULL;
-	buff = ft_strnew(BUFF_SIZE);
-	if (!buff)
-		return (NULL);
-	if (!save)
-		save = ft_strnew(1);
-	while (!ft_strchr(save, '\n') && red_bytes != 0)
-	{	
+	if (!remain)
+		remain = ft_strnew(1);
+	while (!ft_strchr(remain, '\n') && red_bytes != 0)
+	{
 		red_bytes = read(fd, buff, BUFF_SIZE);
 		if (red_bytes == -1)
-		{
-			ft_strdel(&buff);
 			return (NULL);
-		}
 		buff[red_bytes] = '\0';
-		temp = ft_strjoin(save, buff);
-		ft_strdel(&save);
-		save = temp;
+		temp = ft_strjoin(remain, buff);
+		ft_strdel(&remain);
+		remain = temp;
 	}
-	ft_strdel(&buff);
-	return (save);
+	return (remain);
 }
 
 int	get_next_line(const int fd, char **line)
 {
-	static char	*save;
+	static char	*remain[MAX_FD];
 
 	if (!line || fd < 0 || BUFF_SIZE <= 0)
 		return (-1);
-	save = ft_return_temp(fd, save);
-	if (save == NULL)
+	remain[fd] = ft_return_temp(fd, remain[fd]);
+	if (remain[fd] == NULL)
 		return (-1);
-	//*line = ft_new_line(save);
-	*line = ft_new_line(save);
+	*line = ft_new_line(remain[fd]);
 	if (line == NULL)
 		return (-1);
-	
-	save = ft_save(save);
-	return (save != NULL || **line != '\0');
+	remain[fd] = ft_remain(remain[fd]);
+	return (remain[fd] != NULL || **line != '\0');
 }
