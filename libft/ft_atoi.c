@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/includes/libft.h"
+#include "includes/libft.h"
 
 static long	ft_bitsign(long res)
 {

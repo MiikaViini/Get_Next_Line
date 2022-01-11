@@ -11,10 +11,9 @@
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
-#include "get_next_line.h"
-
-static char	*ft_save(char *save)
+char	*ft_save(char *save)
 {
 	int		i;
 	int		k;
@@ -37,20 +36,19 @@ static char	*ft_save(char *save)
 	i++;
 	while (save[i])
 		str[k++] = save[i++];
-	str[k] = '\0';
 	ft_strdel(&save);
 	return (str);
 }
 
-static char	*ft_new_line(char *save)
+char	*ft_new_line(char *save)
 {
 	size_t	i;
 	char	*str;
 
 	i = 0;
-	if (!save[i])
+	if (!save)
 		return (NULL);
-	while (save[i] && save[i] != '\n')
+	while (save[i]&& save[i] != '\n')
 		i++;
 	str = ft_strnew(i);
 	if (!str)
@@ -61,11 +59,10 @@ static char	*ft_new_line(char *save)
 		str[i] = save[i];
 		i++;
 	}
-	str[i] = '\0';
 	return (str);
 }
 
-static char	*ft_return_temp(int fd, char *save)
+char	*ft_return_temp(int fd, char *save)
 {
 	char		*temp;
 	int			red_bytes;
@@ -76,6 +73,8 @@ static char	*ft_return_temp(int fd, char *save)
 	buff = ft_strnew(BUFF_SIZE);
 	if (!buff)
 		return (NULL);
+	if (!save)
+		save = ft_strnew(1);
 	while (!ft_strchr(save, '\n') && red_bytes != 0)
 	{	
 		red_bytes = read(fd, buff, BUFF_SIZE);
@@ -84,6 +83,7 @@ static char	*ft_return_temp(int fd, char *save)
 			ft_strdel(&buff);
 			return (NULL);
 		}
+		buff[red_bytes] = '\0';
 		temp = ft_strjoin(save, buff);
 		ft_strdel(&save);
 		save = temp;
@@ -92,16 +92,20 @@ static char	*ft_return_temp(int fd, char *save)
 	return (save);
 }
 
-int	get_next_line(int fd, char **line)
+int	get_next_line(const int fd, char **line)
 {
 	static char	*save;
 
 	if (!line || fd < 0 || BUFF_SIZE <= 0)
 		return (-1);
 	save = ft_return_temp(fd, save);
+	if (save == NULL)
+		return (-1);
+	//*line = ft_new_line(save);
 	*line = ft_new_line(save);
 	if (line == NULL)
 		return (-1);
+	
 	save = ft_save(save);
-	return (save != NULL);
+	return (save != NULL || **line != '\0');
 }

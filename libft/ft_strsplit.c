@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/includes/libft.h"
+#include "includes/libft.h"
 
 static	size_t	ft_wordcount(const char *s, char c)
 {

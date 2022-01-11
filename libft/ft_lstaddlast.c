@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/includes/libft.h"
+#include "includes/libft.h"
 
 void	ft_lstaddlast(t_list **alst, t_list *new)
 {

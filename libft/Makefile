@@ -39,14 +39,14 @@ SRCS = ft_atoi.c ft_bzero.c ft_isalnum.c ft_isalpha.c \
 OBJ = $(SRCS:.c=.o)
 
 
-INC = libft.h
+INC = includes/
 
 FLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME):
-	gcc -c $(FLAGS) $(SRCS)
+	gcc -c $(FLAGS) $(SRCS) -I $(INC)
 	ar rcs $(NAME) $(OBJ)
 clean:
 	rm -f $(OBJ)
