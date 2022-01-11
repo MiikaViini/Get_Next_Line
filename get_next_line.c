@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 13:58:43 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/11 14:34:06 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/11 14:46:55 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char	*ft_new_line(char *remain)
 	return (str);
 }
 
-static char	*ft_return_temp(int fd, char *remain)
+static char	*ft_remainder(int fd, char *remain)
 {
 	int			red_bytes;
 	char		buff[BUFF_SIZE + 1];
@@ -91,7 +91,7 @@ int	get_next_line(const int fd, char **line)
 
 	if (!line || fd < 0 || BUFF_SIZE <= 0)
 		return (-1);
-	remain[fd] = ft_return_temp(fd, remain[fd]);
+	remain[fd] = ft_remainder(fd, remain[fd]);
 	if (remain[fd] == NULL)
 		return (-1);
 	*line = ft_new_line(remain[fd]);
