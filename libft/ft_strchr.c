@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 11:18:23 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/04 14:16:50 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/13 09:03:42 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 char	*ft_strchr(const char *s, int c)
 {
-	char	*str;
-
-	str = (char *)s;
-	while (str && *str != '\0')
+	while (*s != c)
 	{
-		if (*str == c)
-			return (str);
-		str++;
+		if (*s++ == '\0')
+			return (NULL);
 	}
-	return (NULL);
+	return ((char *)s);
 }

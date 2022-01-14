@@ -6,14 +6,14 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 10:59:51 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/11 14:34:53 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/14 14:50:12 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# define BUFF_SIZE 32
+# define BUFF_SIZE 10000000
 # define MAX_FD 10000
 
 # include "./libft/includes/libft.h"

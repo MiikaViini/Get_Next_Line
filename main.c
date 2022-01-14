@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 15:06:38 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/04 00:28:53 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/14 14:44:48 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	test(int fd)
 	while (ret == 1)
 	{
 		ret = get_next_line(fd, &line);
-		printf("%d %s\n", ret, line);
+		printf("%d %s\n",ret, line);
 		free(line);
 		line = NULL;
 	}
@@ -37,5 +37,5 @@ int	main(void)
 
 	fd = open("text.txt", O_RDONLY);
 	test(fd);
-	return 0;
+	return (0);
 }
