@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 13:58:43 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/17 12:01:15 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/17 12:26:29 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,25 +61,25 @@ static char	*ft_get_remain(char *remain)
 
 int	ft_read_and_join(int fd, char **remain)
 {
-	int			red_bytes;
+	int			read_bytes;
 	char		buff[BUFF_SIZE + 1];
 	char		*temp;
 
-	red_bytes = 1;
+	read_bytes = 1;
 	temp = NULL;
 	if (!remain[fd])
 		remain[fd] = ft_strnew(1);
-	while (!ft_strchr(remain[fd], '\n') && red_bytes != 0)
+	while (!ft_strchr(remain[fd], '\n') && read_bytes != 0)
 	{
-		red_bytes = read(fd, buff, BUFF_SIZE);
-		if (red_bytes == -1)
-			return (red_bytes);
-		buff[red_bytes] = '\0';
+		read_bytes = read(fd, buff, BUFF_SIZE);
+		if (read_bytes == -1)
+			return (read_bytes);
+		buff[read_bytes] = '\0';
 		temp = ft_strjoin(remain[fd], buff);
 		ft_strdel(&remain[fd]);
 		remain[fd] = temp;
 	}
-	return (red_bytes);
+	return (read_bytes);
 }
 
 int	get_next_line(const int fd, char **line)

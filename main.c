@@ -6,7 +6,7 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 15:06:38 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/17 12:07:48 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/17 12:21:13 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	test(int fd)
 	char	*line;
 	int		ret;
 	int		i;
-	int 	linecount;
+	int		linecount;
 
 	i = 0;
 	line = NULL;
