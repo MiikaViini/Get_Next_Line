@@ -6,11 +6,12 @@
 /*   By: mviinika <mviinika@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/31 13:58:43 by mviinika          #+#    #+#             */
-/*   Updated: 2022/01/17 12:26:29 by mviinika         ###   ########.fr       */
+/*   Updated: 2022/01/18 15:25:31 by mviinika         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
 static char	*ft_line_output(char **remain, const int fd)
 {
@@ -78,6 +79,7 @@ int	ft_read_and_join(int fd, char **remain)
 		temp = ft_strjoin(remain[fd], buff);
 		ft_strdel(&remain[fd]);
 		remain[fd] = temp;
+		printf("remain %s", remain[fd]);
 	}
 	return (read_bytes);
 }
@@ -87,7 +89,7 @@ int	get_next_line(const int fd, char **line)
 	static char	*remain[MAX_FD + 1];
 	int			reader;
 
-	if (!line || fd < 0 || BUFF_SIZE <= 0)
+	if (!line || fd < 0 || BUFF_SIZE <= 0 || fd > MAX_FD)
 		return (-1);
 	reader = ft_read_and_join(fd, remain);
 	if (reader < 0)
